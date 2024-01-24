@@ -45,7 +45,7 @@ package kr.bi
 var cnt = 0
 var n = 0
 var k = 0
-lateinit var a: Array<Int>
+lateinit var a: IntArray
 lateinit var tmp: IntArray
 
 fun merge(
@@ -97,7 +97,7 @@ fun main(args: Array<String>) {
     n = newN
     k = newK
 
-    a = readln().split(' ').map { it.toInt() }.toTypedArray()
+    a = readln().split(' ').map { it.toInt() }.toIntArray()
     tmp = IntArray(n)
 
     mergeSort(0, n - 1)
