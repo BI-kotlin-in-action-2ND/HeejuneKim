@@ -6,7 +6,9 @@ out/
 build/
 .gradle/
 
-KotlinAlgo
+build.gradle.kts
+gradle*
+settings.gradle.kts
 
 ### NetBeans ###
 /nbproject/private/
