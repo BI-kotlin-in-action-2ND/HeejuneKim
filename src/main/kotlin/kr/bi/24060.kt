@@ -42,58 +42,63 @@ package kr.bi
     출력
     배열 A에 K 번째 저장 되는 수를 출력한다. 저장 횟수가 K 보다 작으면 -1을 출력한다.
  */
-fun main(args: Array<String>) {
-    val s = readln().split(' ')
-    val n = s[0].toInt()
-    val k = s[1].toInt()
+var cnt = 0
+var n = 0
+var k = 0
+lateinit var a: Array<Int>
+lateinit var tmp: IntArray
 
-    val a = readln().split(' ').map { it.toInt() }.toTypedArray()
-    val tmp = Array(n) { 0 } // 임시 배열 재사용
-    var cnt = 0
+fun merge(
+    p: Int,
+    mid: Int,
+    q: Int,
+) {
+    var (i, j, t) = listOf(p, mid + 1, 0)
 
-    fun merge(
-        p: Int,
-        mid: Int,
-        q: Int,
-    ) {
-        var (i, j, t) = listOf(p, mid + 1, 0)
-
-        while (i <= mid && j <= q) {
-            if (a[i] <= a[j]) {
-                tmp[t++] = a[i++]
-            } else {
-                tmp[t++] = a[j++]
-            }
-        }
-
-        while (i <= mid) {
+    while (i <= mid && j <= q) {
+        if (a[i] <= a[j]) {
             tmp[t++] = a[i++]
-        }
-        while (j <= q) {
+        } else {
             tmp[t++] = a[j++]
         }
-
-        for (index in p..q) {
-            a[index] = tmp[index - p]
-            cnt++
-            if (cnt == k) {
-                println(a[index])
-                return
-            }
-        }
     }
 
-    fun mergeSort(
-        p: Int,
-        r: Int,
-    ) {
-        if (p < r) {
-            val mid = (p + r) / 2
-            mergeSort(p, mid)
-            mergeSort(mid + 1, r)
-            merge(p, mid, r)
+    while (i <= mid) {
+        tmp[t++] = a[i++]
+    }
+    while (j <= q) {
+        tmp[t++] = a[j++]
+    }
+
+    for (index in p..q) {
+        a[index] = tmp[index - p]
+        cnt++
+        if (cnt == k) {
+            println(a[index])
+            return
         }
     }
+}
+
+fun mergeSort(
+    p: Int,
+    r: Int,
+) {
+    if (p < r) {
+        val mid = (p + r) / 2
+        mergeSort(p, mid)
+        mergeSort(mid + 1, r)
+        merge(p, mid, r)
+    }
+}
+
+fun main(args: Array<String>) {
+    val (newN, newK) = readln().split(' ').map { it.toInt() }
+    n = newN
+    k = newK
+
+    a = readln().split(' ').map { it.toInt() }.toTypedArray()
+    tmp = IntArray(n)
 
     mergeSort(0, n - 1)
     if (cnt < k) {
