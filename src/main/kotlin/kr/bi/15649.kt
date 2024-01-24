@@ -15,28 +15,24 @@ package kr.bi
     수열은 사전 순으로 증가하는 순서로 출력해야 한다.
  */
 fun main(args: Array<String>) {
-    val s = readln().split(' ')
-    val n = s[0].toInt()
-    val m = s[1].toInt()
+    val (n, m) = readln().split(' ')
 
-    println(permutation(n, m))
+    println(permutation(n.toInt(), m.toInt()))
 }
 
 fun permutation(
     n: Int,
     m: Int,
 ): String {
-    val arr = Array(m) { 0 }
-    val visited = Array(n) { false }
-    val sb = StringBuilder()
+    val arr = IntArray(m)
+    val visited = BooleanArray(n)
+    var result = ""
 
     fun dfs(depth: Int) {
-        with(sb) {
-            if (depth == m) {
-                arr.forEach { this.append(it).append(' ') }
-                append('\n')
-                return
-            }
+        if (depth == m) {
+            arr.forEach { result += it.toString() + ' ' }
+            result += '\n'
+            return
         }
 
         for (i in 0 until n) {
@@ -50,5 +46,5 @@ fun permutation(
     }
 
     dfs(0)
-    return sb.toString()
+    return result
 }
