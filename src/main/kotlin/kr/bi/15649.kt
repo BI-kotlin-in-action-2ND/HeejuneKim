@@ -15,9 +15,8 @@ package kr.bi
     수열은 사전 순으로 증가하는 순서로 출력해야 한다.
  */
 fun main(args: Array<String>) {
-    val (n, m) = readln().split(' ')
-
-    println(permutation(n.toInt(), m.toInt()))
+    val (n, m) = readln().split(' ').map { it.toInt() }
+    println(permutation(n, m))
 }
 
 fun permutation(
