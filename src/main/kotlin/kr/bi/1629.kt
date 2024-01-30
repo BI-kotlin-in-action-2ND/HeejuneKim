@@ -17,8 +17,7 @@ fun go(
 ): Long {
     if (b == 1L) return a % c
 
-    var result = go(a, b / 2, c)
-    result = (result * result) % c
-    if (b % 2L == 1L) result = (result * a) % c
-    return result
+    val midResult = go(a, b / 2, c)
+    val result = (midResult * midResult) * c
+    return if (b % 2 == 0L) result else (result * a % c)
 }
