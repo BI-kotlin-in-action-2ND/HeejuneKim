@@ -5,7 +5,7 @@ package kr.bi
  */
 
 fun main(args: Array<String>) {
-    val (a, b, c) = readlnOrNull()?.split(" ")!!.map { it.toLong() }
+    val (a, b, c) = readln().split(" ").map { it.toLong() } ?: return
 
     println(go(a, b, c))
 }
